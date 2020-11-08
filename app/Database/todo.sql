@@ -10,7 +10,8 @@ create table user (
     password varchar(255) not null,
     firstname varchar(100),
     lastname varchar(100)
-)
+);
+
 create table task (
     id int primary key auto_increment,
     title varchar(255) not null,
