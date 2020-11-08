@@ -4,7 +4,7 @@ create database todo;
 
 use todo;
 
-create table kayttaja (
+create table user (
     id int primary key auto_increment,
     username varchar(30) not null unique,
     password varchar(255) not null,

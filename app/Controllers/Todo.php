@@ -6,6 +6,12 @@ use App\Models\TodoModel;
 
 class Todo extends BaseController
 {
+    public function __construct()
+    {
+        $session = \Config\Services::session();
+        $session->start();
+    }
+
     public function index()
     {
         $model = new TodoModel();
@@ -27,9 +33,11 @@ class Todo extends BaseController
             echo view('templates/footer');
         }
         else {
+            $user = $_SESSION['user'];
             $model->save([
                 'title' => $this->request->getVar('title'),
-                'description' => $this->request->getVar('description')
+                'description' => $this->request->getVar('description'),
+                'user_id' => $user->id
             ]);
             return redirect('todo');
         }
