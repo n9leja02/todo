@@ -42,4 +42,20 @@ class Todo extends BaseController
             return redirect('todo');
         }
     }
+
+    public function delete($id) {
+        // Check if provided id is numeric (to prevent SQL injection).
+        if (!is_numeric($id)) {
+            throw new \Exception('Provided id is not an number.');
+        }
+
+        // Only logged user is allowed to delete.
+        if (!isset($_SESSION['user'])) {
+            return redirect('login');
+        }
+        $model = new TodoModel(); // Create object of TodoModel.
+
+        $model->remove($id);
+        return redirect('todo');
+    }
 }
