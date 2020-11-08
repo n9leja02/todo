@@ -19,6 +19,6 @@ create table task (
     description text,
     user_id int not null,
     index (user_id),
-    foreign key (user_id) references kayttaja(id)
+    foreign key (user_id) references user(id)
     on delete restrict
 )
