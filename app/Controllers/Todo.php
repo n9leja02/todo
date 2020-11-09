@@ -14,6 +14,11 @@ class Todo extends BaseController
 
     public function index()
     {
+        // Only logged user is allowed to view list.
+        if (!isset($_SESSION['user'])) {
+            return redirect('login');
+        }
+
         $model = new TodoModel();
         $data['title'] = 'Todo';
         $data['todos'] = $model->getTodos();
@@ -23,6 +28,11 @@ class Todo extends BaseController
     }
 
     public function create() {
+         // Only logged user is allowed to create().
+        if (!isset($_SESSION['user'])) {
+            return redirect('login');
+        }
+        
         $model = new TodoModel();
 
         if (!$this->validate([
@@ -49,7 +59,7 @@ class Todo extends BaseController
             throw new \Exception('Provided id is not an number.');
         }
 
-        // Only logged user is allowed to delete.
+        // Only logged user is allowed to delete().
         if (!isset($_SESSION['user'])) {
             return redirect('login');
         }
